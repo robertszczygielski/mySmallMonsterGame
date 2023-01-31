@@ -11,3 +11,6 @@
     - basic game service, showing monsters
     - first menu to interaction with player
     
+### Lesson 4.
+    - pickup monster by player
+    

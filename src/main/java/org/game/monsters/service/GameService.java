@@ -7,17 +7,18 @@ import java.util.List;
 
 public class GameService {
 
-    private final MonsterConfiguration monsterConfiguration = new MonsterConfiguration();
+    private final MonsterService monsterService = new MonsterService();
     private final MenuService menuService = new MenuService();
 
+    private Monster playerMonster;
+    private Monster enemyMonster;
+
     public boolean play() {
-        List<Monster> monsters = monsterConfiguration.getMonsters();
 
-        for (Monster monster: monsters) {
-            System.out.println(monster);
-        }
-
+        playerMonster = monsterService.pickupMonster();
         String playerChoice = menuService.showMenu();
+
+        System.out.println("You chose: " + playerMonster);
 
         if (playerChoice.equals("x")) return false;
 
