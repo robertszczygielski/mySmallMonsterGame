@@ -2,6 +2,7 @@ package org.game.monsters;
 
 import org.game.monsters.configuration.MonsterConfiguration;
 import org.game.monsters.dto.Monster;
+import org.game.monsters.service.GameService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,12 +13,13 @@ import java.util.UUID;
 public class MonstersApplication {
 
 	public static void main(String[] args) {
-		MonsterConfiguration monsterConfiguration = new MonsterConfiguration();
-		List<Monster> monsters = monsterConfiguration.getMonsters();
+		GameService gameService = new GameService();
 
-		for (Monster monster: monsters) {
-			System.out.println(monster);
+		for(;;) {
+			boolean playing = gameService.play();
+			if (!playing) break;
 		}
+
 	}
 
 //	public static void main(String[] args) {

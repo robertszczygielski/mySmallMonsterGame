@@ -7,3 +7,7 @@
 ### Lesson 2.
     - hardcoded configuration with monsters 
     
+### Lesson 3.
+    - basic game service, showing monsters
+    - first menu to interaction with player
+    
