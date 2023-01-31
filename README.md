@@ -16,4 +16,7 @@
     
 ### Lesson 5.
     - pickup enemy monster by the Game
+
+### Lesson 6.
+    - add dice: model, basic service and dto
     
