@@ -16,9 +16,11 @@ public class GameService {
     public boolean play() {
 
         playerMonster = monsterService.pickupMonster();
+        enemyMonster = monsterService.pickupMonster(playerMonster);
         String playerChoice = menuService.showMenu();
 
         System.out.println("You chose: " + playerMonster);
+        System.out.println("Enemy monster: " + enemyMonster);
 
         if (playerChoice.equals("x")) return false;
 

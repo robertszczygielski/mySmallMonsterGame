@@ -14,3 +14,6 @@
 ### Lesson 4.
     - pickup monster by player
     
+### Lesson 5.
+    - pickup enemy monster by the Game
+    

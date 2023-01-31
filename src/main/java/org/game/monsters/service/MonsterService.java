@@ -4,7 +4,9 @@ import org.game.monsters.configuration.MonsterConfiguration;
 import org.game.monsters.dto.Monster;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class MonsterService {
@@ -31,4 +33,13 @@ public class MonsterService {
         return monsters.get(playerChoice);
     }
 
+    public Monster pickupMonster(Monster reservedMonster) {
+        List<Monster> monsters = monsterConfiguration.getMonsters();
+        Random random = new Random();
+        Monster chosenMonster = monsters.stream()
+                .filter(monster -> !monster.equals(reservedMonster))
+                .toList()
+                .get(random.nextInt(monsters.size() - 1));
+        return chosenMonster;
+    }
 }

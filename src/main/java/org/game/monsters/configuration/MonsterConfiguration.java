@@ -13,6 +13,7 @@ public class MonsterConfiguration {
     public MonsterConfiguration() {
         this.monsters.add(new Monster(UUID.randomUUID(), "Big Ant"));
         this.monsters.add(new Monster(UUID.randomUUID(), "Small Gorilla"));
+        this.monsters.add(new Monster(UUID.randomUUID(), "Pink Lion"));
     }
 
     public List<Monster> getMonsters() {
