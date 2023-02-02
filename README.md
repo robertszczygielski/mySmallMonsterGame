@@ -20,3 +20,7 @@
 ### Lesson 6.
     - add dice: model, basic service and dto
     
+### Lesson 7.
+    - Dice Tower Service, to rool the all dices
+    - implements Comparable interfaces in Dice Dto
+    

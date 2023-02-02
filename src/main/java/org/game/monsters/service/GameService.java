@@ -12,6 +12,7 @@ public class GameService {
 
     private final MonsterService monsterService = new MonsterService();
     private final MenuService menuService = new MenuService();
+    private final DiceTowerService diceTowerService = new DiceTowerService();
 
     private Monster playerMonster;
     private Monster enemyMonster;
@@ -33,15 +34,16 @@ public class GameService {
 
     private void rollDices() {
         List<Dice> dices = new ArrayList<>();
-        Dice dice1 = new Dice();
-        dice1.setDiceValue(DiceValueEnum.BITE);
-        Dice dice2 = new Dice();
-        dice2.setDiceValue(DiceValueEnum.ONE);
-        dices.add(dice1);
-        dices.add(dice2);
 
-        dices.stream()
+        for (int i=0; i<6; i++) {
+            dices.add(new Dice());
+        }
+
+        List<Dice> diceList = diceTowerService.roll(dices);
+
+        diceList.stream()
                 .forEach(System.out::println);
+
     }
 
 }

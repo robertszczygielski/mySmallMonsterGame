@@ -17,6 +17,13 @@ public enum DiceValueEnum {
         this.symbol = symbol;
     }
 
+    public static DiceValueEnum getByIndex(int index) {
+        for (DiceValueEnum dve: values()) {
+            if (dve.index == index) return dve;
+        }
+        throw new IllegalArgumentException("No index " + index + " found");
+    }
+
     public int getIndex() {
         return index;
     }

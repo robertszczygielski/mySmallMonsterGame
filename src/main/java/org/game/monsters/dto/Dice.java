@@ -2,7 +2,7 @@ package org.game.monsters.dto;
 
 import java.util.Objects;
 
-public class Dice {
+public class Dice implements Comparable<Dice> {
 
     DiceValueEnum diceValue;
 
@@ -32,5 +32,12 @@ public class Dice {
         return "Dice{" +
                 "diceValue=" + diceValue +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Dice o) {
+        if (this.diceValue.getIndex() < o.diceValue.getIndex()) return -1;
+        if (this.diceValue.getIndex() > o.diceValue.getIndex()) return 1;
+        return 0;
     }
 }
