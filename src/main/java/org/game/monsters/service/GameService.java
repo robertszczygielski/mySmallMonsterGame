@@ -1,8 +1,6 @@
 package org.game.monsters.service;
 
-import org.game.monsters.configuration.MonsterConfiguration;
 import org.game.monsters.dto.Dice;
-import org.game.monsters.dto.DiceValueEnum;
 import org.game.monsters.dto.Monster;
 
 import java.util.ArrayList;
@@ -19,17 +17,35 @@ public class GameService {
 
     public boolean play() {
 
-        playerMonster = monsterService.pickupMonster();
-        enemyMonster = monsterService.pickupMonster(playerMonster);
-        String playerChoice = menuService.showMenu();
-        rollDices();
+        if (playerMonster == null && enemyMonster == null) {
+            playerMonster = monsterService.pickupMonster();
+            enemyMonster = monsterService.pickupMonster(playerMonster);
+        }
 
-        System.out.println("You chose: " + playerMonster);
-        System.out.println("Enemy monster: " + enemyMonster);
+        boolean continueGame = menuDispatcher();
 
-        if (playerChoice.equals("x")) return false;
+        return continueGame;
+    }
 
-        return true;
+    private boolean menuDispatcher() {
+        String playerChoice = menuService.showMenu().toUpperCase();
+        if (playerChoice.equals("A")) rollDices();
+        if (playerChoice.equals("B")) displayMyMonster();
+        if (playerChoice.equals("C")) displayEnemyMonster();
+
+        return !playerChoice.equals("X");
+    }
+
+    private void displayEnemyMonster() {
+        System.out.println("===============================");
+        System.out.println("Enemy monster is: ");
+        System.out.println(enemyMonster);
+    }
+
+    private void displayMyMonster() {
+        System.out.println("===============================");
+        System.out.println("Your monster is: ");
+        System.out.println(playerMonster);
     }
 
     private void rollDices() {

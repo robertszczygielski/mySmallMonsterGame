@@ -11,8 +11,8 @@ import java.util.stream.IntStream;
 
 public class MonsterService {
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
+    private final String ANSI_RESET = "\u001B[0m";
+    private final String ANSI_RED = "\u001B[31m";
     private final MonsterConfiguration monsterConfiguration = new MonsterConfiguration();
 
     public Monster pickupMonster() {

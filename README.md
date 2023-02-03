@@ -24,3 +24,8 @@
     - Dice Tower Service, to rool the all dices
     - implements Comparable interfaces in Dice Dto
     
+### Lesson 8.
+    - Update menu: 
+    -- show player monster
+    -- show enemy monster
+    -- roll the dices
