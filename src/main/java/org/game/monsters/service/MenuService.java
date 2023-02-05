@@ -13,6 +13,9 @@ public class MenuService {
         System.out.println("Chose 'a' to use dice tower: ");
         System.out.println("Chose 'b' show my monster: ");
         System.out.println("Chose 'c' show enemy monster: ");
+        System.out.println("Chose 'd' go to the island: ");
+        System.out.println("Chose 'e' leave the island: ");
+        System.out.println("Chose 'f' show monster on the island: ");
         System.out.println("Chose 'x' to exit: ");
         System.out.println(ANSI_RESET);
         return keyboard.nextLine();

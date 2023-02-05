@@ -29,3 +29,7 @@
     -- show player monster
     -- show enemy monster
     -- roll the dices
+
+### Lesson 9.
+    - island service
+    - update menu, show island options

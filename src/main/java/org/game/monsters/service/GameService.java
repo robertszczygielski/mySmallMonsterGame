@@ -11,6 +11,7 @@ public class GameService {
     private final MonsterService monsterService = new MonsterService();
     private final MenuService menuService = new MenuService();
     private final DiceTowerService diceTowerService = new DiceTowerService();
+    private final IslandService islandService = new IslandService();
 
     private Monster playerMonster;
     private Monster enemyMonster;
@@ -32,8 +33,23 @@ public class GameService {
         if (playerChoice.equals("A")) rollDices();
         if (playerChoice.equals("B")) displayMyMonster();
         if (playerChoice.equals("C")) displayEnemyMonster();
+        if (playerChoice.equals("D")) takeTheIsland();
+        if (playerChoice.equals("E")) leaveTheIsland();
+        if (playerChoice.equals("F")) showTheIslandMonster();
 
         return !playerChoice.equals("X");
+    }
+
+    private void showTheIslandMonster() {
+        System.out.println(islandService.getOccupyingMonster());
+    }
+
+    private void leaveTheIsland() {
+        islandService.resetIsland();
+    }
+
+    private void takeTheIsland() {
+        islandService.setOccupyingMonster(playerMonster);
     }
 
     private void displayEnemyMonster() {
