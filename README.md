@@ -33,3 +33,6 @@
 ### Lesson 9.
     - island service
     - update menu, show island options
+
+### Lesson 10.
+    - reroll dices

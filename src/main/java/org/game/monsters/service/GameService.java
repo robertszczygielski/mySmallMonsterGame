@@ -4,7 +4,11 @@ import org.game.monsters.dto.Dice;
 import org.game.monsters.dto.Monster;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class GameService {
 
@@ -30,7 +34,11 @@ public class GameService {
 
     private boolean menuDispatcher() {
         String playerChoice = menuService.showMenu().toUpperCase();
-        if (playerChoice.equals("A")) rollDices();
+        if (playerChoice.equals("A")) {
+            List<Dice> dices = rollDices().stream().sorted().collect(Collectors.toList());
+            rerollDices(dices);
+            showRolledDices(dices);
+        }
         if (playerChoice.equals("B")) displayMyMonster();
         if (playerChoice.equals("C")) displayEnemyMonster();
         if (playerChoice.equals("D")) takeTheIsland();
@@ -38,6 +46,52 @@ public class GameService {
         if (playerChoice.equals("F")) showTheIslandMonster();
 
         return !playerChoice.equals("X");
+    }
+
+    private void showRolledDices(List<Dice> dices) {
+        diceTowerService.showRolledDices(dices);
+    }
+
+    private List<Dice> rerollDices(List<Dice> dices) {
+        int numbersOfReroll = 2;
+        for (int i = 0; i < numbersOfReroll; i++) {
+            System.out.println("Current dices: ");
+            dices.stream()
+                    .forEach(System.out::println);
+
+            System.out.println(i + " reroll:" );
+            System.out.println("Do you wont to reroll the dice? (Y/N): ");
+            Scanner scanner = new Scanner(System.in);
+
+            String playerChoice = scanner.nextLine().toUpperCase();
+            if (playerChoice.equals("N")) return dices;
+
+            IntStream.range(0, dices.size())
+                    .forEach(idx -> {
+                        System.out.println(idx + ") " + dices.get(idx));
+                    });
+
+            System.out.println("Pickup all, separate by coma (,): ");
+            playerChoice = scanner.nextLine().toUpperCase();
+
+            String [] choiceDice = playerChoice.replaceAll("\\s+", "").split(",");
+            if (choiceDice.length == 0) {
+                System.err.println("You do not have pickup dices");
+                return dices;
+            }
+
+            List<Dice> dicesToReroll = Arrays.stream(choiceDice)
+                    .map(diceIndex -> Integer.valueOf(diceIndex))
+                    .map(diceIndex -> dices.get(diceIndex))
+                    .collect(Collectors.toList());
+
+            dicesToReroll.forEach(dice -> dices.remove(dice));
+
+            List<Dice> newRolledDices = diceTowerService.roll(dicesToReroll);
+            dices.addAll(newRolledDices);
+
+        }
+        return dices.stream().sorted().collect(Collectors.toList());
     }
 
     private void showTheIslandMonster() {
@@ -64,10 +118,10 @@ public class GameService {
         System.out.println(playerMonster);
     }
 
-    private void rollDices() {
+    private List<Dice> rollDices() {
         List<Dice> dices = new ArrayList<>();
 
-        for (int i=0; i<6; i++) {
+        for (int i = 0; i < 6; i++) {
             dices.add(new Dice());
         }
 
@@ -76,6 +130,7 @@ public class GameService {
         diceList.stream()
                 .forEach(System.out::println);
 
+        return dices;
     }
 
 }
