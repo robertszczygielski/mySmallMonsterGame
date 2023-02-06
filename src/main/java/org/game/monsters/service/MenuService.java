@@ -2,14 +2,14 @@ package org.game.monsters.service;
 
 import java.util.Scanner;
 
-public class MenuService {
+import static org.game.monsters.utils.StringColors.ANSI_GREEN;
+import static org.game.monsters.utils.StringColors.ANSI_RESET;
 
-    private final String ANSI_RESET = "\u001B[0m";
-    private final String ANSI_GREEN = "\u001B[32m";
+public class MenuService {
 
     public String showMenu() {
         Scanner keyboard = new Scanner(System.in);
-        System.out.println(ANSI_GREEN);
+        ANSI_GREEN.setColor();
         System.out.println("Chose 'a' to use dice tower: ");
         System.out.println("Chose 'b' show my monster: ");
         System.out.println("Chose 'c' show enemy monster: ");
@@ -17,7 +17,7 @@ public class MenuService {
         System.out.println("Chose 'e' leave the island: ");
         System.out.println("Chose 'f' show monster on the island: ");
         System.out.println("Chose 'x' to exit: ");
-        System.out.println(ANSI_RESET);
+        ANSI_RESET.setColor();
         return keyboard.nextLine();
     }
 

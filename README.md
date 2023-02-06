@@ -36,3 +36,6 @@
 
 ### Lesson 10.
     - reroll dices
+
+### Lesson 11.
+    - one place with string colors - enum 

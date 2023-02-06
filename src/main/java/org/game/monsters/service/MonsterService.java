@@ -8,10 +8,11 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+import static org.game.monsters.utils.StringColors.ANSI_RED;
+import static org.game.monsters.utils.StringColors.ANSI_RESET;
+
 public class MonsterService {
 
-    private final String ANSI_RESET = "\u001B[0m";
-    private final String ANSI_RED = "\u001B[31m";
     private final MonsterConfiguration monsterConfiguration = new MonsterConfiguration();
 
     public Monster pickupMonster() {
@@ -19,7 +20,9 @@ public class MonsterService {
 
         IntStream.range(0, monsters.size())
                 .forEach(idx -> {
-                             System.out.println(ANSI_RED + idx + ") " + ANSI_RESET);
+                             ANSI_RED.setColor();
+                             System.out.println(idx + ") ");
+                             ANSI_RESET.setColor();
                              System.out.println(monsters.get(idx));
                          }
                 );
