@@ -10,6 +10,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.game.monsters.utils.StringColors.*;
+
 public class GameService {
 
     private final MonsterService monsterService = new MonsterService();
@@ -19,6 +21,8 @@ public class GameService {
 
     private Monster playerMonster;
     private Monster enemyMonster;
+
+    private final int MIN_MONSTER_HP_TO_OCCUPY_THE_ISLAND = 10;
 
     public boolean play() {
 
@@ -38,6 +42,7 @@ public class GameService {
             List<Dice> dices = rollDices().stream().sorted().collect(Collectors.toList());
             rerollDices(dices);
             showRolledDices(dices);
+            enemyMonsterIslandMoves();
         }
         if (playerChoice.equals("B")) displayMyMonster();
         if (playerChoice.equals("C")) displayEnemyMonster();
@@ -46,6 +51,20 @@ public class GameService {
         if (playerChoice.equals("F")) showTheIslandMonster();
 
         return !playerChoice.equals("X");
+    }
+
+    private void enemyMonsterIslandMoves() {
+        if (islandService.getOccupyingMonster() == null) {
+            islandService.setOccupyingMonster(enemyMonster);
+        }
+        if (enemyMonster.getHealthPoints() < MIN_MONSTER_HP_TO_OCCUPY_THE_ISLAND) {
+            islandService.resetIsland();
+            ANSI_RED.setColor();
+            System.out.print("Enemy monster leaved the island, his name is ");
+            ANSI_YELLOW.setColor();
+            System.out.println(enemyMonster.getName());
+            ANSI_RESET.setColor();
+        }
     }
 
     private void showRolledDices(List<Dice> dices) {

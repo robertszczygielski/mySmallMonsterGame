@@ -14,7 +14,7 @@ public enum StringColors {
         this.colorCode = colorCode;
     }
 
-    public String getColorCode() {
+    private String getColorCode() {
         return colorCode;
     }
 

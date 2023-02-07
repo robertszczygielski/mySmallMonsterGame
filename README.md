@@ -38,4 +38,7 @@
     - reroll dices
 
 ### Lesson 11.
-    - one place with string colors - enum 
+    - one place with string colors - enum
+
+### Lesson 12.
+    - add logic for enemy monster to occupy and leave the island 
