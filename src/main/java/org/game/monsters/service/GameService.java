@@ -2,6 +2,7 @@ package org.game.monsters.service;
 
 import org.game.monsters.dto.Dice;
 import org.game.monsters.dto.Monster;
+import org.game.monsters.utils.StringColors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +57,10 @@ public class GameService {
 
     private void useDices(List<Dice> dices) {
         monsterService.addVictoryPoints(playerMonster, dices);
+        ANSI_RED.setColor();
+        System.out.print("---------------------------------------");
+        ANSI_RESET.setColor();
+        monsterService.addEnergyPoints(playerMonster, dices);
     }
 
     private void enemyMonsterIslandMoves() {

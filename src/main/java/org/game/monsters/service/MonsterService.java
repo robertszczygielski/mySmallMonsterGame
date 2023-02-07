@@ -37,6 +37,33 @@ public class MonsterService {
         return monsters.get(playerChoice);
     }
 
+    public void addEnergyPoints(Monster monster, List<Dice> diceList) {
+        int energyFromDices = Math.toIntExact(
+                diceList.stream()
+                        .filter(dice -> dice.getDiceValue().isEnergy())
+                        .count()
+        );
+        int currentEnergy = monster.getEnergy();
+
+        System.out.print("Energy before adding: ");
+        ANSI_GREEN.setColorSemLine();
+        System.out.print(currentEnergy);
+        ANSI_RESET.setColor();
+        System.out.print("Energy to add: ");
+        ANSI_YELLOW.setColorSemLine();
+        System.out.println(energyFromDices);
+
+        monster.setEnergy(currentEnergy + energyFromDices);
+
+        ANSI_RESET.setColor();
+        System.out.print("Monster " + monster.getName() + " hes now ");
+        ANSI_GREEN.setColorSemLine();
+        System.out.print(monster.getEnergy());
+        ANSI_RESET.setColorSemLine();
+        System.out.println(" Energy");
+
+    }
+
     public void addVictoryPoints(Monster monster,
                                  List<Dice> diceList) {
         List<Dice> ones = new ArrayList<>();
