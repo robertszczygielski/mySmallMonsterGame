@@ -112,10 +112,10 @@ public class MonsterService {
         );
         int victoryPoint = 0;
 
-        if (diceList.size() < 4) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 4) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 5) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 6) victoryPoint += basicVictoryPoint;
+        if (diceList.size() >= 3) victoryPoint += basicVictoryPoint;
+        if (diceList.size() == 4) victoryPoint += 1;
+        if (diceList.size() == 5) victoryPoint += 2;
+        if (diceList.size() == 6) victoryPoint += 3;
 
         return victoryPoint;
     }

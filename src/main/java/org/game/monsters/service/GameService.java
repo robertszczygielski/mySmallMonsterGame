@@ -2,6 +2,7 @@ package org.game.monsters.service;
 
 import org.game.monsters.dto.Dice;
 import org.game.monsters.dto.Monster;
+import org.game.monsters.utils.StringColors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,8 +33,31 @@ public class GameService {
         }
 
         boolean continueGame = menuDispatcher();
+        boolean isVictory = victoryMonster();
 
-        return continueGame;
+        return continueGame && isVictory;
+    }
+
+    private boolean victoryMonster() {
+        ANSI_GREEN.setColor();
+        System.out.println("THE END");
+        if (playerMonster.getHealthPoints() <= 0) {
+            System.out.println("You are defeated");
+            return false;
+        }
+        if (enemyMonster.getHealthPoints() <= 0) {
+            System.out.println("You are WINN");
+            return false;
+        }
+        if (playerMonster.getVictoryPoints() >= 20) {
+            System.out.println("You are WINN");
+            return false;
+        }
+        if (enemyMonster.getVictoryPoints() >= 20) {
+            System.out.println("You are defeated");
+            return false;
+        }
+        return true;
     }
 
     private boolean menuDispatcher() {

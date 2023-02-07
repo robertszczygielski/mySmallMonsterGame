@@ -54,3 +54,6 @@
 
 ### Lesson 16.
     - add logic for monster fight
+
+### Lesson 17.
+    - ending by Victory
