@@ -51,3 +51,6 @@
 
 ### Lesson 15.
     - add logic for counting health points
+
+### Lesson 16.
+    - add logic for monster fight

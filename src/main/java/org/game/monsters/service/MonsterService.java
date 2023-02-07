@@ -3,7 +3,6 @@ package org.game.monsters.service;
 import org.game.monsters.configuration.MonsterConfiguration;
 import org.game.monsters.dto.Dice;
 import org.game.monsters.dto.Monster;
-import org.game.monsters.utils.StringColors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,10 +112,10 @@ public class MonsterService {
         );
         int victoryPoint = 0;
 
-        if (diceList.size() < 4) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 4) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 5) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 6) victoryPoint += basicVictoryPoint;
+        if (diceList.size() >= 3) victoryPoint += basicVictoryPoint;
+        if (diceList.size() == 4) victoryPoint += 1;
+        if (diceList.size() == 5) victoryPoint += 2;
+        if (diceList.size() == 6) victoryPoint += 3;
 
         return victoryPoint;
     }
@@ -160,6 +159,33 @@ public class MonsterService {
         System.out.print("Monster " + monster.getName() + " hes now ");
         ANSI_GREEN.setColorSemLine();
         System.out.print(monster.getHealthPoints());
+        ANSI_RESET.setColorSemLine();
+        System.out.println(" Health Points");
+    }
+
+    public void attackEnemy(Monster enemyMonster,
+                            List<Dice> diceList) {
+        int attackPoints = Math.toIntExact(
+                diceList.stream()
+                        .filter(dice -> dice.getDiceValue().isAttack())
+                        .count()
+        );
+        int beforeAttack = enemyMonster.getHealthPoints();
+
+        System.out.print("Health Points before attack: ");
+        ANSI_GREEN.setColorSemLine();
+        System.out.print(beforeAttack);
+        ANSI_RESET.setColor();
+        System.out.print("attack take points: ");
+        ANSI_YELLOW.setColorSemLine();
+        System.out.println(attackPoints);
+
+        enemyMonster.setHealthPoints(beforeAttack - attackPoints);
+
+        ANSI_RESET.setColor();
+        System.out.print("Monster " + enemyMonster.getName() + " hes now ");
+        ANSI_GREEN.setColorSemLine();
+        System.out.print(enemyMonster.getHealthPoints());
         ANSI_RESET.setColorSemLine();
         System.out.println(" Health Points");
     }
