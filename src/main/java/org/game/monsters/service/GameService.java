@@ -61,6 +61,12 @@ public class GameService {
         System.out.print("---------------------------------------");
         ANSI_RESET.setColor();
         monsterService.addEnergyPoints(playerMonster, dices);
+        if (!islandService.getOccupyingMonster().equals(playerMonster)) {
+            ANSI_RED.setColor();
+            System.out.print("---------------------------------------");
+            ANSI_RESET.setColor();
+            monsterService.addHealthPoints(playerMonster, dices);
+        }
     }
 
     private void enemyMonsterIslandMoves() {

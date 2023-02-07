@@ -113,10 +113,10 @@ public class MonsterService {
         );
         int victoryPoint = 0;
 
-        if (diceList.size() < 4) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 4) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 5) victoryPoint += basicVictoryPoint;
-        if (diceList.size() == 6) victoryPoint += basicVictoryPoint;
+        if (diceList.size() >= 3) victoryPoint += basicVictoryPoint;
+        if (diceList.size() == 4) victoryPoint += 1;
+        if (diceList.size() == 5) victoryPoint += 2;
+        if (diceList.size() == 6) victoryPoint += 3;
 
         return victoryPoint;
     }
@@ -129,5 +129,38 @@ public class MonsterService {
                 .toList()
                 .get(random.nextInt(monsters.size() - 1));
         return chosenMonster;
+    }
+
+    public void addHealthPoints(Monster monster,
+                                List<Dice> dices) {
+        int healthPointsToAdd = Math.toIntExact(
+                dices.stream()
+                        .filter(dice -> dice.getDiceValue().isLive())
+                        .count()
+        );
+        int currentHealthPoints = monster.getHealthPoints();
+
+        if (currentHealthPoints > 20) {
+            ANSI_RED.setColor();
+            System.out.println("Monster has max Health points: " + currentHealthPoints);
+            return;
+        }
+
+        System.out.print("Health Points before adding: ");
+        ANSI_GREEN.setColorSemLine();
+        System.out.print(currentHealthPoints);
+        ANSI_RESET.setColor();
+        System.out.print("Health Points to add: ");
+        ANSI_YELLOW.setColorSemLine();
+        System.out.println(healthPointsToAdd);
+
+        monster.setHealthPoints(healthPointsToAdd + currentHealthPoints);
+
+        ANSI_RESET.setColor();
+        System.out.print("Monster " + monster.getName() + " hes now ");
+        ANSI_GREEN.setColorSemLine();
+        System.out.print(monster.getHealthPoints());
+        ANSI_RESET.setColorSemLine();
+        System.out.println(" Health Points");
     }
 }

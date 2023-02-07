@@ -39,4 +39,8 @@ public enum DiceValueEnum {
     public boolean isEnergy() {
         return this == ENERGY;
     }
+
+    public boolean isLive() {
+        return this == LIVE;
+    }
 }
