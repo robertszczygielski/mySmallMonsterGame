@@ -57,3 +57,6 @@
 
 ### Lesson 17.
     - ending by Victory
+
+### Lesson 18.
+    - correct IndexOutOfBoundsException and NumberFormatException

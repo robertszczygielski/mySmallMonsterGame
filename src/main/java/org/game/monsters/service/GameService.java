@@ -192,7 +192,9 @@ public class GameService {
             }
 
             List<Dice> dicesToReroll = Arrays.stream(choiceDice)
+                    .filter(diceIndex -> diceIndex.matches("\\d+"))
                     .map(diceIndex -> Integer.valueOf(diceIndex))
+                    .filter(diceIndex -> diceIndex < 6)
                     .map(diceIndex -> dices.get(diceIndex))
                     .collect(Collectors.toList());
 
