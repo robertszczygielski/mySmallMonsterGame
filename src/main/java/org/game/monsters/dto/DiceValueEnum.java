@@ -35,4 +35,8 @@ public enum DiceValueEnum {
     public boolean isVictoryPoint() {
         return this == ONE || this == TWO || this == THREE;
     }
+
+    public boolean isEnergy() {
+        return this == ENERGY;
+    }
 }

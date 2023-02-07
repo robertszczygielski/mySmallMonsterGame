@@ -44,4 +44,7 @@
     - add logic for enemy monster to occupy and leave the island
 
 ### Lesson 13.
-    - add logic for counting victory points 
+    - add logic for counting victory points
+
+### Lesson 14.
+    - add logic for counting energy 
