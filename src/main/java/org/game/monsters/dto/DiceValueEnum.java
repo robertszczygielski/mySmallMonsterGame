@@ -32,4 +32,7 @@ public enum DiceValueEnum {
         return symbol;
     }
 
+    public boolean isVictoryPoint() {
+        return this == ONE || this == TWO || this == THREE;
+    }
 }

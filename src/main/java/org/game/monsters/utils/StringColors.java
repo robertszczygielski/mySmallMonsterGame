@@ -22,4 +22,8 @@ public enum StringColors {
         System.out.println(this.getColorCode());
     }
 
+    public void setColorSemLine() {
+        System.out.print(this.getColorCode());
+    }
+
 }

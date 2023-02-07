@@ -43,6 +43,7 @@ public class GameService {
             rerollDices(dices);
             showRolledDices(dices);
             enemyMonsterIslandMoves();
+            useDices(dices);
         }
         if (playerChoice.equals("B")) displayMyMonster();
         if (playerChoice.equals("C")) displayEnemyMonster();
@@ -51,6 +52,10 @@ public class GameService {
         if (playerChoice.equals("F")) showTheIslandMonster();
 
         return !playerChoice.equals("X");
+    }
+
+    private void useDices(List<Dice> dices) {
+        monsterService.addVictoryPoints(playerMonster, dices);
     }
 
     private void enemyMonsterIslandMoves() {
