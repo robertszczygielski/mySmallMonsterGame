@@ -43,4 +43,8 @@ public enum DiceValueEnum {
     public boolean isLive() {
         return this == LIVE;
     }
+
+    public boolean isAttack() {
+        return this == BITE;
+    }
 }
