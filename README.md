@@ -60,3 +60,6 @@
 
 ### Lesson 18.
     - correct IndexOutOfBoundsException and NumberFormatException
+
+### Lesson 19.
+    - update menu options, show only needed options

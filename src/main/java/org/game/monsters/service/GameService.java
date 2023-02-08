@@ -40,20 +40,23 @@ public class GameService {
 
     private boolean victoryMonster() {
         ANSI_GREEN.setColor();
-        System.out.println("THE END");
         if (playerMonster.getHealthPoints() <= 0) {
+            System.out.println("THE END");
             System.out.println("You are defeated");
             return false;
         }
         if (enemyMonster.getHealthPoints() <= 0) {
+            System.out.println("THE END");
             System.out.println("You are WINN");
             return false;
         }
         if (playerMonster.getVictoryPoints() >= 20) {
+            System.out.println("THE END");
             System.out.println("You are WINN");
             return false;
         }
         if (enemyMonster.getVictoryPoints() >= 20) {
+            System.out.println("THE END");
             System.out.println("You are defeated");
             return false;
         }
@@ -61,7 +64,11 @@ public class GameService {
     }
 
     private boolean menuDispatcher() {
-        String playerChoice = menuService.showMenu().toUpperCase();
+        boolean monsterOnIsland = islandService.getOccupyingMonster() != null;
+        boolean playerMonsterOnIsland = monsterOnIsland && islandService.getOccupyingMonster().equals(playerMonster);
+
+        String playerChoice = menuService.showMenu(monsterOnIsland, playerMonsterOnIsland).toUpperCase();
+
         if (playerChoice.equals("A")) {
             List<Dice> dices = rollDices().stream().sorted().collect(Collectors.toList());
             rerollDices(dices);
@@ -71,9 +78,9 @@ public class GameService {
         }
         if (playerChoice.equals("B")) displayMyMonster();
         if (playerChoice.equals("C")) displayEnemyMonster();
-        if (playerChoice.equals("D")) takeTheIsland();
-        if (playerChoice.equals("E")) leaveTheIsland();
-        if (playerChoice.equals("F")) showTheIslandMonster();
+        if (playerChoice.equals("D") && !monsterOnIsland) takeTheIsland();
+        if (playerChoice.equals("E") && playerMonsterOnIsland) leaveTheIsland();
+        if (playerChoice.equals("F") && monsterOnIsland) showTheIslandMonster();
 
         return !playerChoice.equals("X");
     }
@@ -149,6 +156,9 @@ public class GameService {
         if (islandService.getOccupyingMonster() == null) {
             islandService.setOccupyingMonster(enemyMonster);
         }
+
+        if (islandService.getOccupyingMonster().equals(playerMonster)) return;
+
         if (enemyMonster.getHealthPoints() < MIN_MONSTER_HP_TO_OCCUPY_THE_ISLAND) {
             islandService.resetIsland();
             ANSI_RED.setColor();
